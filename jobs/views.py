@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import View
+from .models import Jobs
 # Create your views here.
 
 
 class Index(View):
-	template_name = 'base.html'
-
 	def get(self,request, *args, **kwargs):
-		return render(request, self.template_name)
+		params = dict()
+		jobs = Jobs.objects.all()
+		params["jobs"] = jobs
+		return render(request, "index.html", params)

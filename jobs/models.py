@@ -1,21 +1,46 @@
 from __future__ import unicode_literals
-
+from company_profile.models import User
 from django.db import models
 
 # Create your models here.
+class Company(models.Model):
+	''' Descipcion de la Empresa '''
+	company = models.CharField(max_length=50)
+	companyDescription = models.TextField()
+	companyWebsite = models.CharField(max_length=50, unique=True, blank=True, null=True)
+	companyImage = models.ImageField(upload_to='company/%Y/%m/%d')
+
+	def  __unicode__(self):
+		return self.company
 
 class Jobs(models.Model):
 	''' Descripcion  de los empleos '''
-	title = models.CharField(max_length=100, unique=True)
-	company = models.CharField(max_length=50)
-	companyDescription = models.TextField()
+	company = models.ForeignKey(Company)
+	title = models.CharField(max_length=100)
 	jobDescription = models.TextField()
 	skills = models.TextField()
 	postedDate = models.DateField(auto_now_add=True)
-	salaryRange = models.CharField(max_length=30)
+	SALARY = (
+		('1', 'Menos de 10,000'),
+		('2', '10,000 - 20,000'),
+		('3', '20,000 - 30,000'),
+		('4', '30,000 - 40,000'),
+		('5', '40,000 - 60,000'),
+		('6', '60,000 - 80,000'),
+		('7', '80,000 o superior')
+	)
+
+	TIPO_DE_EMPLEO = (
+		('C','Tiempo Completo'),
+		('T','Temporal')
+	)
+
+	salaryRange = models.CharField(max_length=1,choices=SALARY)
+	jobtype = models.CharField(max_length=1,choices=TIPO_DE_EMPLEO)
 	slug = models.SlugField(max_length=50, unique=True)
-	jobImage = models.ImageField(upload_to='company/%Y/%m/%d')
 	category = models.ManyToManyField("Category", blank=True)
+	user = models.ForeignKey(User)
+	is_active = models.BooleanField(default=True)
 
 class Category(models.Model):
 	''' Un empleo puede tener muchas categorias '''
@@ -23,3 +48,4 @@ class Category(models.Model):
 	
 	def __unicode__(self):
 		return self.name
+

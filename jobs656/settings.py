@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'django_markdown',
+    'company_profile',    
     'jobs',
+
 ]
 
 MIDDLEWARE_CLASSES = [

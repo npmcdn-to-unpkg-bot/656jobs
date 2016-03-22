@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row jobpins">
+	{% for empleo in jobs %}
+	<div class="col-md-3">
+		<div class="box">
+			<div class="media">
+				<div class="media-left">
+					<img class="media-object" />
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading box-header">{{ empleo.title }}</h4>
+					<p class="box-company"><strong>{{ empleo.company }}</strong></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

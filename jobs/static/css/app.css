@@ -1,0 +1,32 @@
+ /* Cajitas de empleos */
+.box{
+ border:1px solid whitesmoke;
+ padding:2px;
+ border-radius:5px;
+ margin-top:5px;
+ background-color:white;
+}
+
+
+.box-header{
+ margin-left:30px;
+ margin-top: 5px;
+ font-size: 10px;
+ font-family: 'Michroma', sans-serif;
+ font-weight:700;
+ color: black;
+}
+
+.box-company{
+ margin-left:30px;
+ font-family: 'Yanone Kaffeesatz', sans-serif;
+ color:gray;
+}
+
+.jobpins{
+ background-color: whitesmoke;
+ padding-top:5px;
+ padding-bottom:10px;
+ border:1px solid whitesmoke;
+ border-radius:5px;
+}
