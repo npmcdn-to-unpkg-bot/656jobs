@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container-fluid">
-	<div class="row jobpins">
+	<div class="row">
 		{% for empleo in jobs %}
-		<div class="col-sm-3">
+		<div class="col-md-3">
 			<div class="box">
 				<div class="media">
 					<div class="media-left">
@@ -12,7 +12,7 @@
 					</div>
 					<div class="media-body">
 						<h4 class="media-heading box-header"><a href="/job/{{ empleo.slug }}">
-							{{ empleo.title }}</a></h4>
+							<strong>{{ empleo.title }}</strong></a></h4>
 						<p class="box-company"><strong>{{ empleo.company }}</strong></p>
 					</div>
 				</div>
