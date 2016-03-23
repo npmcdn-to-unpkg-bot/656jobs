@@ -42,6 +42,12 @@ class Jobs(models.Model):
 	user = models.ForeignKey(User)
 	is_active = models.BooleanField(default=True)
 
+	def salary_verbose(self):
+		return dict(Jobs.SALARY)[self.salaryRange]
+
+	def jobtype_verbose(self):
+		return dict(Jobs.TIPO_DE_EMPLEO)[self.jobtype]
+
 class Category(models.Model):
 	''' Un empleo puede tener muchas categorias '''
 	name = models.CharField(max_length=50)

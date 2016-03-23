@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{% for job in empleo %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>{{ job.title }}</h2>
+			<p>{{ job.postedDate }}</p>
+			<hr>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 jobDescription">
+			<span><img src="{{ job.company.companyImage.url }}" width="64px" height="64px"/></span> {{ job.company }}
+			<hr>
+			<h5>Tipo de Empleo</h5>
+			<p>{{ job.jobtype_verbose }}</p>
+			<h5>Salario</h5>
+			<p>{{ job.salary_verbose }}</p>
+			<h5>Categorias</h5>
+			{% for category in job.category.all %}
+				<span class="label label-danger">{{ category }}</span>
+			{% endfor %}
+			<hr>
+			<a href="{{ job.company.companyWebsite }}">{{ job.company.companyWebsite }}</a>
+		</div>
+		<div class="col-md-5">
+			<h5>Descripcion de Empleo</h5>
+			<p class="jobDescription">{{ job.jobDescription }}</p>
+			<h5>Requisitos</h5>
+			<p class="jobDescription">{{ job.skills }}</p>
+			<h5>Acerca de la Empresa</h5>
+			<p class="jobDescription">{{ job.company.companyDescription }}</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="applybtn">
+				<button class="btn btn-primary">Aplicar para este empleo</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endblock %}
