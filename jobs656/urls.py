@@ -17,14 +17,19 @@ from django.conf.urls import url, patterns, include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
-from jobs.views import Index, Details
+from jobs.views import Index, Details, DetailsById
+from rest_framework.urlpatterns import format_suffix_patterns
+from jobs import views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', Index.as_view()),
     url(r'job/(?P<slug>[\w-]+)/$', Details.as_view()),
-    url(r'^$', Index.as_view())
+    url(r'api/(?P<pk>[0-9]+)/$', DetailsById.as_view()),
 ]
 
+urlpatterns = format_suffix_patterns(urlpatterns)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
