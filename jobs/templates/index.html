@@ -1,24 +1,87 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block content %}
-<div class="container-fluid">
-	<div class="row">
-		{% for empleo in jobs %}
-		<div class="col-md-3">
-			<div class="box">
-				<div class="media">
-					<div class="media-left">
-						<img class="media-object" src="{{ empleo.company.companyImage.url }}" 
-						width="64px" height="64px"/>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading box-header"><a href="/job/{{ empleo.slug }}">
-							<strong>{{ empleo.title }}</strong></a></h4>
-						<p class="box-company"><strong>{{ empleo.company }}</strong></p>
-					</div>
-				</div>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
-</div>
+ <header id="home">
+          <section class="hero" id="hero">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center inner">
+                  <img class="animated fadeInDown responsive" src="{% static "img/656jobs.png" %}" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                  <a href="/jobs/" class="learn-more-btn">Ver empleos</a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </header>
+         <section class="intro text-center section-padding" id="intro">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2">
+                <h1 class="arrow">Encuentra buenos empleos y buenos empleados</h1>
+                <p>656jobs es un portal de empleos diseñado para las necesidades de nuestra region fronteriza.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="subscribe text-center">
+          <div class="container">
+            <h1><i class="fa fa-paper-plane"></i><span>Subscribete para recibir nuevos empleos</span></h1>
+            <form action="#">
+              <input type="text" name="" value="" placeholder="" required>
+              <input type="submit" name="" value="Send">
+            </form>
+          </div>
+        </section>
+        <section class="dark-bg text-center section-padding contact-wrap" id="contact">
+          <a href="#top" class="up-btn"><i class="fa fa-chevron-up"></i></a>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <h1 class="arrow">Contactanos</h1>
+              </div>
+            </div>
+            <div class="row contact-details">
+              <div class="col-md-6">
+                <div class="light-box box-hover">
+                  <h2><i class="fa fa-mobile"></i><span>Telefono</span></h2>
+                  <p>(656) 285-8381</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="light-box box-hover">
+                  <h2><i class="fa fa-paper-plane"></i><span>Email</span></h2>
+                  <p><a href="#">servicio@656jobs.com</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="social-buttons">
+                  <li><a href="#" class="social-btn"><i class="fa fa-dribbble"></i></a></li>
+                  <li><a href="#" class="social-btn"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="#" class="social-btn"><i class="fa fa-envelope"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <ul class="legals">
+                  <li><a href="#">Terminos y Condiciones</a></li>
+                  <li><a href="#">Legal</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 credit">
+                <p>Designed &amp; Developed by <a href="http://dev-haven.com/">DevHaven</a></p>
+              </div>
+            </div>
+          </div>
+        </footer>
 {% endblock %}

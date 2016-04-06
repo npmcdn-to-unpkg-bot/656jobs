@@ -7,13 +7,16 @@ from .serializers import JobsSerializer
 
 # Create your views here.
 
-
 class Index(View):
+	def get(self,request, *args, **kwargs):
+		return render(request, "index.html")
+
+class AllJobs(View):
 	def get(self,request, *args, **kwargs):
 		params = dict()
 		jobs = Jobs.objects.all()
 		params["jobs"] = jobs
-		return render(request, "index.html", params)
+		return render(request, "jobs.html", params)
 
 class Details(View):
 	def get(self,request, *args, **kwargs):
@@ -28,10 +31,3 @@ class Details(View):
 class DetailsById(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Jobs.objects.all()
 	serializer_class = JobsSerializer
-
-
-'''
-class JobsList(viewsets.ModelViewSet):
-	queryset = Jobs.objects.all()
-	serializer_class = JobsSerializer
-'''
