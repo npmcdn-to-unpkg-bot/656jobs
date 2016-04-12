@@ -2,26 +2,31 @@
 {% load staticfiles %}
 {% block content %}
 <div class="container">
-  <div id="wrapper">
-      <div id="loginWindow">
-        <div class="page-header">
-          <p class="left"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></p>
-          {% load staticfiles %}
-          <img src="{% static "img/656jobs.png" %}" />
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon1">Usuario</span>
-          <input type="text" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon" id="basic-addon2">Password</span>
-          <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2">
-        </div>
-        <button id="form_button" class="btn btn-primary" type="submit">login</button>
-         <p class="member">No eres miembro? <a href="#">Registrate</a> <span class="fontawesome-arrow-right"></span></p>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div id="wrapper">
+          <div id="loginWindow">
+            <div class="page-header">
+              <p class="left"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></p>
+              {% load staticfiles %}
+              <img src="{% static "img/656jobs.png" %}" />
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Usuario</span>
+              <input type="text" class="form-control" placeholder="Usuario" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon2">Password</span>
+              <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2">
+            </div>
+            <button id="form_button" class="btn btn-primary" type="submit">Entrar</button>
+             <p class="member">No eres miembro? <a href="/register">Registrate</a> <span class="fontawesome-arrow-right"></span></p>
+          </div>
       </div>
+    </div>
   </div>
 </div>
+  
 <script>
 $( document ).ready( function(){
   $( '#loginWindow' ).animate({ 'width': '100%' }, 500)
