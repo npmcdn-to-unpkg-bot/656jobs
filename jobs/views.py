@@ -3,6 +3,7 @@ from django.views.generic import View
 from .models import Jobs
 from rest_framework import generics
 from .serializers import JobsSerializer
+from django.contrib.auth.mixins import LoginRequiredMixin
 #from rest_framework import viewsets
 
 # Create your views here.
@@ -24,9 +25,18 @@ class Details(View):
 		params = dict()
 		slug = self.kwargs['slug']
 		empleo = Jobs.objects.filter(slug=slug)
-		print empleo
 		params["empleo"] = empleo
 		return render(request,"details.html", params)
+
+class Dashboard(LoginRequiredMixin,View):
+	login_url = '/login/'
+	def get(self, request, *args, **kwargs):
+		return render(request, "dashboard.html")
+		
+		
+class Login(View):
+	def get(self, request, *args, **kwargs):
+		return render(request, "login.html")
 		
 class DetailsById(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Jobs.objects.all()

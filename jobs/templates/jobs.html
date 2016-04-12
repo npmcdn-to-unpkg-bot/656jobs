@@ -2,6 +2,14 @@
 {% block content %}
 <div class="container-fluid">
 	<div class="row">
+		<div class="col-md-3">
+			<ol class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active">Jobs</li>
+			</ol>
+		</div>
+	</div>
+	<div class="row">
 		{% for empleo in jobs %}
 		<div class="col-md-3">
 			<div class="box">
@@ -11,10 +19,9 @@
 						width="64px" height="64px"/>
 					</div>
 					<div class="media-body">
-						<h4 class="media-heading box-header"><a href="/job/{{ empleo.slug }}">
+						<h4 class="media-heading box-header"><a href="/job/{{ empleo.company }}/{{ empleo.slug }}">
 							<strong>{{ empleo.title }}</strong></a></h4>
-						<p class="box-company"><strong>{{ empleo.company }}</strong></p>
-						<p class="postedate_all">{{ empleo.postedDate | timesince }}</p>
+						<p class="postedate_all">{{ empleo.postedDate | timesince}}</p>
 					</div>
 				</div>
 			</div>

@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 # Create your models here.
 
-class User(AbstractBaseUser):
+class CompanyUser(AbstractBaseUser):
 	''' Custom Login para Empresa '''
 	username = models.CharField('usuario', max_length=30,
 	unique=True, db_index=True)

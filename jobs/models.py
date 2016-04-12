@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from company_profile.models import User
+from company_profile.models import CompanyUser
 from django.db import models
 
 # Create your models here.
@@ -8,8 +8,10 @@ class Company(models.Model):
 	company = models.CharField(max_length=50)
 	companyDescription = models.TextField()
 	companyWebsite = models.CharField(max_length=50, unique=True, blank=True, null=True)
+	companyEmail = models.EmailField(max_length=75)
 	companyImage = models.ImageField(upload_to='company/%Y/%m/%d')
-
+	user = models.ForeignKey(CompanyUser)
+	
 	def  __unicode__(self):
 		return self.company
 
@@ -39,15 +41,13 @@ class Jobs(models.Model):
 	jobtype = models.CharField(max_length=1,choices=TIPO_DE_EMPLEO)
 	slug = models.SlugField(max_length=50, unique=True)
 	category = models.ManyToManyField("Category", blank=True)
-	user = models.ForeignKey(User)
-	is_active = models.BooleanField(default=True)
 
 	def salary_verbose(self):
 		return dict(Jobs.SALARY)[self.salaryRange]
 
 	def jobtype_verbose(self):
 		return dict(Jobs.TIPO_DE_EMPLEO)[self.jobtype]
-
+		
 class Category(models.Model):
 	''' Un empleo puede tener muchas categorias '''
 	name = models.CharField(max_length=50)
