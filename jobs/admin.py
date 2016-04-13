@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Company, Jobs, Category
 from company_profile.models import CompanyUser
+from candidate_profile.models import CandidateUser
 
 # Register your models here.
 
@@ -16,4 +17,4 @@ admin.site.register(Company,CompanyAdmin)
 admin.site.register(Jobs,JobsAdmin)
 admin.site.register(Category)
 admin.site.register(CompanyUser)
-
+admin.site.register(CandidateUser)

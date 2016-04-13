@@ -11,24 +11,17 @@
               {% load staticfiles %}
               <img src="{% static "img/656jobs.png" %}" />
             </div>
-            <form method="POST">
+             <form method="POST">
               {% csrf_token %}
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Usuario</span>
-                 {{ form.username }}
+                {{ form.username }}
               </div>
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon2">Password</span>
                 {{ form.password }}
               </div>
-              <button id="form_button" class="btn btn-primary" type="submit">Entrar</button>
-               <p class="member">No eres miembro? <a href="/register">Registrate</a> <span class="fontawesome-arrow-right"></span></p>
-               {% if error %}
-               <div class="alert alert-danger fade in">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>{{ error }}</strong>
-                </div>
-               {% endif %}
+              <button id="form_button" class="btn btn-primary" type="submit">Registrarse</button>
             </form>
           </div>
       </div>

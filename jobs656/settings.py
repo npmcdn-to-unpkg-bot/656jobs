@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_markdown',
-    'company_profile',    
+    'company_profile',
+    'candidate_profile',
     'jobs',
     'rest_framework',
 
