@@ -85,10 +85,9 @@ class Register(View):
 			
 			#returns the User objects if credentials are correct
 			user = authenticate(username=username,password=password)
-			if user is not None:
-				if user.is_active:
-					login(request,user)
-					return redirect('/dashboard')
+			if user is not None and user.is_active:
+				login(request,user)
+				return redirect('/dashboard')
 		
 class DetailsById(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Jobs.objects.all()
