@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load tz %}
 {% block content %}
 <div class="container-fluid">
 	<div class="row">
@@ -21,7 +22,7 @@
 					<div class="media-body">
 						<h4 class="media-heading box-header"><a href="/job/{{ empleo.company }}/{{ empleo.slug }}">
 							<strong>{{ empleo.title }}</strong></a></h4>
-						<p class="postedate_all">{{ empleo.postedDate | timesince}}</p>
+						<p class="postedate_all">{{ empleo.postedDate | timesince }}</p>
 					</div>
 				</div>
 			</div>
@@ -29,4 +30,10 @@
 		{% endfor %}
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$(".box").hide();
+		$(".box").fadeIn(1000);
+	});
+</script>
 {% endblock %}

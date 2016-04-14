@@ -4,7 +4,7 @@ from .models import Jobs
 from rest_framework import generics
 from .serializers import JobsSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import UserForm
 #from rest_framework import viewsets
 
@@ -16,7 +16,7 @@ class Index(View):
 
 class AllJobs(View):
 	def get(self,request, *args, **kwargs):
-		params = dict()
+		params = {}
 		jobs = Jobs.objects.all()
 		params["jobs"] = jobs
 		return render(request, "jobs.html", params)
@@ -24,7 +24,7 @@ class AllJobs(View):
 class Details(View):
 	def get(self,request, *args, **kwargs):
 		# Trarme los detalles mediante el slug, como argumento kwargs
-		params = dict()
+		params = {}
 		slug = self.kwargs['slug']
 		empleo = Jobs.objects.filter(slug=slug)
 		params["empleo"] = empleo
@@ -41,7 +41,7 @@ class Login(View):
 	
 	def get(self, request, *args, **kwargs):
 		form = self.login_form
-		params = dict()
+		params = {}
 		params["form"] = form
 		return render(request, "login.html", params)
 	
@@ -57,19 +57,23 @@ class Login(View):
 			else: 
 				# Return invalid login message
 				error = "Lo siento tu usuario o password son incorrectos!"
-				params = dict()
+				params = {}
 				form = self.login_form
 				params["form"] = form
 				params["error"] = error
 		return render(request,"login.html", params)
-			
+
+class Logout(View):
+	def get(self, request, *args, **kwargs):
+		logout(request)
+		return redirect('/')			
 	
 class Register(View):
 	register_form = UserForm
 	
 	def get(self, request, *args, **kwargs):
 		form = self.register_form
-		params = dict()
+		params = {}
 		params["form"] = form
 		return render(request, "register.html", params)
 	

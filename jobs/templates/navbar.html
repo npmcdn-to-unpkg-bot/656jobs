@@ -3,6 +3,29 @@
     <div class="navbar-header">
     	{% load staticfiles %}
         <a href="/"><img class="navbar-brand" src="{% static "img/656jobs.png" %}" /></a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <div>
+        <ul class="nav navbar-nav">
+          <li><a href="/jobs">Empleos</a></li>
+          <li><a href="#"><span class="label label-danger">Postea un Empleo</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+           <li><a href="/dashboard"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; Tu Perfil</a></i></li>
+            <li><a href="/logout"><i class="fa fa-unlock" aria-hidden="true"></i>&nbsp; Logout</a></i></li>
+          {% else %}
+          <li><a href="/login"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp; Login</a></i></li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
   </div>
 </nav>

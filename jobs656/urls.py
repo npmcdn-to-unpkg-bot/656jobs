@@ -17,7 +17,7 @@ from django.conf.urls import url, patterns, include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
-from jobs.views import Index, AllJobs, Details, DetailsById, Dashboard, Login, Register
+from jobs.views import Index, AllJobs, Details, DetailsById, Dashboard, Login, Logout, Register
 from rest_framework.urlpatterns import format_suffix_patterns
 from jobs import views
 
@@ -30,7 +30,8 @@ urlpatterns = [
     url(r'dashboard/$', Dashboard.as_view()),
     url(r'job/\w+/(?P<slug>[\w-]+)/$', Details.as_view()),
     url(r'api/(?P<pk>[0-9]+)/$', DetailsById.as_view()),
-    url(r'login/$', Login.as_view())
+    url(r'login/$', Login.as_view()),
+    url(r'logout/$', Logout.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
