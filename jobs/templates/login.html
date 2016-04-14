@@ -8,6 +8,12 @@
           <div id="loginWindow">
             <div class="page-header">
               <p class="left"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></p>
+               {% if error %}
+               <div class="alert alert-danger fade in">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong>{{ error }}</strong>
+                </div>
+               {% endif %}
               {% load staticfiles %}
               <img src="{% static "img/656jobs.png" %}" />
             </div>
@@ -23,14 +29,6 @@
               </div>
               <button id="form_button" class="btn btn-primary" type="submit">Entrar</button>
                <p class="member">No eres miembro? <a href="/register">Registrate</a> <span class="fontawesome-arrow-right"></span></p>
-               {% if error %}
-               <div class="alert alert-danger fade in">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>{{ error }}</strong>
-                </div>
-                <script>
-                </script>
-               {% endif %}
             </form>
           </div>
       </div>
@@ -46,7 +44,7 @@ $( document ).ready( function(){
   $( '.page-header, .input-group, .btn, p' )
     .delay(1000)
     .animate({ 'opacity': '100' }, 7000);
-  $(".alert").fadeOut(10000);
+  $(".alert").fadeOut(8000);
 });
 </script>
 {% endblock %}

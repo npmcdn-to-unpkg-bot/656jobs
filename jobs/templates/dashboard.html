@@ -14,7 +14,7 @@
     <section>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar Perfil</button>
+                <a href="/dashboard/edit_profile/{{ user.id }}"><button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar Perfil</button></a>
             </div>
         </div>
         <div class="row">
@@ -31,9 +31,6 @@
                   <ul class="list-group">
                       <li class="list-group-item"><i class="fa fa-user profileicon" aria-hidden="true"></i>&nbsp;{{ user }}</li>
                       <li class="list-group-item"><i class="fa fa-envelope profileicon" aria-hidden="true"></i>&nbsp;{{ user.email }}</li>
-                      <li class="list-group-item"><i class="fa fa-calendar-o profileicon" aria-hidden="true"></i></li>
-                      <li class="list-group-item">Porta ac consectetur ac</li>
-                      <li class="list-group-item">Vestibulum at eros</li>
                   </ul>
                 </div>
             </div>
