@@ -159,7 +159,9 @@ section{
   font-size: 1em;
 }
 
-
+.errorbox{
+    margin-top: 40%;
+}
 
 #wrapper {
   font-family: "Quicksand", sans-serif;
@@ -232,4 +234,17 @@ section{
 
 .profileicon{
     color:black;
+}
+
+#updateWindow{
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-bottom: 2em;
+    border: solid #eee 1px;
+    border-radius: 5px;
+    width: 0;
+    height: 0;
 }

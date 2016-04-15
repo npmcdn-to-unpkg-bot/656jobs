@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
-from company_profile.models import CompanyUser
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Company(models.Model):
@@ -10,7 +10,6 @@ class Company(models.Model):
 	companyWebsite = models.CharField(max_length=50, unique=True, blank=True, null=True)
 	companyEmail = models.EmailField(max_length=75)
 	companyImage = models.ImageField(upload_to='company/%Y/%m/%d')
-	user = models.ForeignKey(CompanyUser)
 	
 	def  __unicode__(self):
 		return self.company
@@ -55,3 +54,13 @@ class Category(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class Profile(models.Model):
+	user = models.OneToOneField(User)
+	professional_name = models.CharField(max_length=100)
+	profile_image = models.ImageField(upload_to='profile_images/%Y/%m/%d')
+	resume = models.FileField(upload_to='resumes/%Y/%m/%d', help_text='PDF')
+	summary = models.TextField(blank=True,null=True)
+	contact = models.TextField(blank=True,null=True, help_text='Agrega todas las formas en que podamos contactarte')
+
+	def __unicode__(self):
+		return self.user.username

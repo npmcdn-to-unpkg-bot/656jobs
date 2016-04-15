@@ -5,8 +5,9 @@ from rest_framework import generics
 from .serializers import JobsSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserForm
+from .forms import UserForm, EditProfile
 from utils import username_exists
+from django.contrib.auth.models import User
 #from rest_framework import viewsets
 
 # Create your views here.
@@ -108,3 +109,28 @@ class Register(View):
 class DetailsById(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Jobs.objects.all()
 	serializer_class = JobsSerializer
+	
+	
+class UpdateProfile(View):
+	def get(self,request, *args, **kwargs):
+		form = EditProfile(instance=request.user)
+		params = {}
+		params["form"] = form
+		return render(request, "update_profile.html", params)
+	
+	def post(self, request, *args, **kwargs):
+		if request.POST:
+			form = EditProfile(request.POST,request.FILES,instance=request.user)
+			print form
+			if form.is_valid():
+				profile = form.save(commit=False)
+				email = form.cleaned_data['email']
+				print email
+				return redirect('/dashboard')
+			else:
+				form = EditProfile(instance=request.user)
+				params = {}
+				params["form"] = form
+				return render(request, "update_profile.html", params)
+			
+				

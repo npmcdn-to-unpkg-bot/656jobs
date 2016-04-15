@@ -10,12 +10,6 @@
               <p class="left"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></p>
               {% load staticfiles %}
               <img src="{% static "img/656jobs.png" %}" />
-               {% if error %}
-               <div class="alert alert-danger fade in">
-                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong>{{ error }}</strong>
-                </div>
-               {% endif %}
             </div>
              <form method="POST">
               {% csrf_token %}
@@ -28,13 +22,20 @@
                 {{ form.password }}
               </div>
               <button id="form_button" class="btn btn-primary" type="submit">Registrarse</button>
+              {% if error %}
+              <div class="input-group">
+               <div class="alert alert-danger fade in">
+                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong>{{ error }}</strong>
+                </div>
+              </div>
+               {% endif %}
             </form>
           </div>
       </div>
     </div>
   </div>
 </div>
-  
 <script>
 $( document ).ready( function(){
   $( '#loginWindow' ).animate({ 'width': '100%' }, 500)
