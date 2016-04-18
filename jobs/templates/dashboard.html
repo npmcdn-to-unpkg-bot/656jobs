@@ -22,17 +22,23 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object" src="http://mqltv.com/wp-content/gallery/katy-perry/Katy-Perry-wallpapers.jpg" alt="profile" width="64px" height="64px">
+                      <img class="media-object" src="{{ user.profile.profile_image.url }}" alt="profile" width="64px" height="64px">
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading">{{ user.get_full_name }}</h4>
+                    <h4 class="media-heading profileheading">{{ user.get_full_name }}<br> {{ user.profile.professional_name }}</h4>
                   </div>
                   <ul class="list-group">
                       <li class="list-group-item"><i class="fa fa-user profileicon" aria-hidden="true"></i>&nbsp;{{ user }}</li>
-                      <li class="list-group-item"><i class="fa fa-envelope profileicon" aria-hidden="true"></i>&nbsp;{{ user.email }}</li>
+                      <li class="list-group-item"><i class="fa fa-envelope profileicon" aria-hidden="true"></i>&nbsp;<a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
+                      <li class="list-group-item"><i class="fa fa-file-pdf-o profileicon" aria-hidden="true"></i><a href="{{ user.profile.resume.url }}">&nbsp;Curriculum</a></li>
+                      <li class="list-group-item"><i class="fa fa-mobile profileicon" aria-hidden="true"></i>&nbsp;{{ user.profile.contact }}</li>
                   </ul>
                 </div>
+            </div>
+            <div class="col-md-6 profile-left">
+                <h3>Habilidades</h3>
+                <p>{{ user.profile.summary }}</p>
             </div>
         </div>
 	</section>

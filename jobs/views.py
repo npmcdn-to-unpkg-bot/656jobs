@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
-from .models import Jobs
+from .models import Jobs, Profile
 from rest_framework import generics
 from .serializers import JobsSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -58,7 +58,7 @@ class Login(View):
 				return redirect('/dashboard')
 			else: 
 				# Return invalid login message
-				error = "Lo siento tu usuario o password son incorrectos!"
+				error = "Lo siento tu usuario o password son incorrectos"
 				params = {}
 				form = self.login_form
 				params["form"] = form
@@ -84,7 +84,6 @@ class Register(View):
 			form = self.register_form(request.POST)
 			username = request.POST['username']
 			user_exist = username_exists(username)
-			print user_exist
 			if user_exist:
 				error = "Ya existe este usuario elige otro"
 				params = {}
@@ -105,6 +104,12 @@ class Register(View):
 					if user is not None and user.is_active:
 						login(request,user)
 						return redirect('/dashboard')
+				else:
+					params = dict()
+					params["error"] = form.errors
+					params["form"] = form
+					return render(request,"register.html", params)
+					
 		
 class DetailsById(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Jobs.objects.all()
@@ -112,25 +117,38 @@ class DetailsById(generics.RetrieveUpdateDestroyAPIView):
 	
 	
 class UpdateProfile(View):
-	def get(self,request, *args, **kwargs):
-		form = EditProfile(instance=request.user)
-		params = {}
+	template_name = "update_profile.html"
+	profile_form = EditProfile
+	
+	
+	def get(self, request, *args, **kwargs):
+		
+		try:
+			profile = request.user.profile
+		except:
+			profile = Profile(user=request.user)
+		
+		form = self.profile_form(instance=profile)
+		params = dict()
 		params["form"] = form
-		return render(request, "update_profile.html", params)
+		return render(request, self.template_name, params)
+		
 	
 	def post(self, request, *args, **kwargs):
-		if request.POST:
-			form = EditProfile(request.POST,request.FILES,instance=request.user)
-			print form
-			if form.is_valid():
-				profile = form.save(commit=False)
-				email = form.cleaned_data['email']
-				print email
-				return redirect('/dashboard')
-			else:
-				form = EditProfile(instance=request.user)
-				params = {}
-				params["form"] = form
-				return render(request, "update_profile.html", params)
+		try:
+			profile = request.user.profile
+		except:
+			profile = Profile(user=request.user)
 			
-				
+		form = self.profile_form(request.POST,request.FILES, instance=profile)
+		
+		if form.is_valid():
+			profile = form.save(commit=False)
+			profile.save()
+			return redirect('/dashboard')
+		
+		else:
+			params = dict()
+			params["error"] = form.errors
+			params["form"] = form
+			return render(request, self.template_name, params)
