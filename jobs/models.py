@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
+import uuid
 
 # Create your models here.
 class Company(models.Model):
@@ -62,7 +63,8 @@ class Profile(models.Model):
 	resume = models.FileField(upload_to='resumes/%Y/%m/%d', help_text='PDF')
 	summary = models.TextField(blank=True,null=True)
 	contact = models.TextField(blank=True,null=True, help_text='Agrega todas las formas en que podamos contactarte')
-
+	uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	
 	def __unicode__(self):
 		return self.user.username
 		
@@ -77,6 +79,8 @@ class WorkExperience(models.Model):
 	def current_job(self):
 		if self.end_date == datetime.date.today():
 			return True
+		else:
+			return False
 	
 	
 	def __unicode__(self):

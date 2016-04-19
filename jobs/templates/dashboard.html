@@ -14,26 +14,55 @@
     <section>
         <div class="row">
             <div class="col-md-12">
-                <a href="/dashboard/edit_profile/{{ user.id }}"><button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar Perfil</button></a>
+                <a href="/dashboard/edit_profile/{{ user.profile.uuid }}/{{ user.id }}"><button class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar Perfil</button></a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3">
-                <div class="profile_aside">
-                    <div class="person_image">
-                        <img class="image-profile" src="{{ user.profile.profile_image.url }}" alt="profile">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile_aside">
+                            <div class="person_image">
+                                <img class="image-profile" src="{{ user.profile.profile_image.url }}" alt="profile">
+                            </div>
+                             <h4 class="person_name">{{ user.get_full_name }}</h4>
+                             <p class="person_job">{{ user.profile.professional_name }}</p>
+                             <div class="person_contact">
+                                <button class="contact_button "><a href="mailto:{{ user.email }}"><i class="fa fa-envelope"></i></a></button>
+                              </div>
+                        </div>
                     </div>
-                     <h4 class="person_name">{{ user.get_full_name }}</h4>
-                     <p class="person_job">{{ user.profile.professional_name }}</p>
-                     <div class="person_contact">
-                        <button class="contact_button"><a href="mailto:{{ user.email }}"><i class="fa fa-envelope"></i></a></button>
-                      </div>
+                    <div class="col-md-12">
+                       <div class="profile_aside">
+                           <i class="fa fa-share-square-o" aria-hidden="true"></i><span class="contacto_header"> Contacto</span>
+                           <p>{{ user.profile.contact | safe}}</p>
+                       </div>
+                    </div>
+                    <div class="col-md-12">
+                       <div class="profile_aside">
+                           <i class="fa fa fa-file-pdf-o" aria-hidden="true"></i><span class="contacto_header"> curriculum</span>
+                           <p><a href="{{ user.profile.resume.url }}">
+                           <i class="fa fa fa-file-pdf-o fa-4x" aria-hidden="true"></i></a></p>
+                       </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-8">
-                <article class="debug">
-                    Esto va en el lado derecho
-                </article>
+                <div id="main" class="profile-main">
+                    <h5>Habilidades</h5>
+                    <p>{{ user.profile.summary | safe }}</p>
+                    <h5>Experiencia Laboral</h5>
+                    {% for work in works %}
+                        <h3>{{ work.place }}</h3>
+                        <hr>
+                        {% if work.current_job  %}
+                            <p>Empleo Actual</p>
+                        {% else %}
+                            <p>{{ work.start_date }} - {{ work.end_date }}</p>
+                        {% endif %}
+                        <p>{{ work.work_description }}</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
 	</section>

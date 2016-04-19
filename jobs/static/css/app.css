@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Quicksand);
+@import url(https://fonts.googleapis.com/css?family=Oswald);
 
 body { 
 	padding-top: 50px;
@@ -78,10 +79,6 @@ ul{
 
 .description{
  border-bottom: 1px solid #DDDDDD;
-}
-
-section{
- border:1px dashed black;
 }
 
 
@@ -173,6 +170,16 @@ section{
   box-shadow:0 0 2px gray;
 }
 
+#wrapper_profile{
+  font-family: "Quicksand", sans-serif;
+  bottom: 0;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  clear: both;
+  box-shadow:0 0 2px gray;
+}
+
 #loginWindow {
   background-color: white;
   margin-left: auto;
@@ -210,11 +217,6 @@ section{
 
 .fa-lock, .fa-user, .fa-unlock{
     color:white;
-}
-
-
-.debug{
-    border:1px dashed black;
 }
 
 
@@ -270,6 +272,15 @@ section{
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.profile-main{
+    background-color: #FFF;
+    border-radius: 5px;
+    padding:20px;
+    margin-top:20px;
+    margin-bottom:20px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 .person_image {
   margin-top: 2rem;
   position: relative;
@@ -286,19 +297,41 @@ section{
 
 .person_name {
   font-size: 1.4em;
-  margin: 2rem 0 0.25rem 2rem;
+  text-align: center;
 }
 
 .person_job {
   color: #BCBCBC;
-  margin-left:3.5rem;
-  margin-bottom: 1.25rem;
   font-size: 0.85em;
+  text-align: center;
 }
 
 .contact_button {
   background: #FFFFFF;
   border: none;
-  margin: 0 0.25rem 2rem;
-  margin-left: 6rem;
+}
+
+#main > h5{
+    font-size: 35px;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+}
+
+#main > h3{
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    color:#e42b48;
+}
+
+.debug{
+    border:1px solid dashed;
+}
+
+.contacto_header{
+    font-size: 15px;
+    text-transform: uppercase;
+    padding-left: 20px;
+    font-family: 'Oswald', sans-serif;
 }
