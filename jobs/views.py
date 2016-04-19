@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
-from .models import Jobs, Profile
+from .models import Jobs, Profile, WorkExperience
 from rest_framework import generics
 from .serializers import JobsSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -35,7 +35,12 @@ class Details(View):
 class Dashboard(LoginRequiredMixin,View):
 	login_url = '/login/'
 	def get(self, request, *args, **kwargs):
-		return render(request, "dashboard.html")
+		userid = User.objects.get(username=request.user)
+		userid = userid.id
+		work_experience = WorkExperience.objects.all().filter(user_id=userid)
+		params = dict()
+		params["works"] = work_experience
+		return render(request, "dashboard.html", params)
 		
 		
 class Login(View):

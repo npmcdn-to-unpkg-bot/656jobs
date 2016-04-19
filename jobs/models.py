@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 class Company(models.Model):
@@ -62,5 +63,21 @@ class Profile(models.Model):
 	summary = models.TextField(blank=True,null=True)
 	contact = models.TextField(blank=True,null=True, help_text='Agrega todas las formas en que podamos contactarte')
 
+	def __unicode__(self):
+		return self.user.username
+		
+class WorkExperience(models.Model):
+	user = models.ForeignKey(User)
+	place = models.CharField(max_length=100)
+	start_date = models.DateField() 
+	end_date = models.DateField()
+	work_description = models.TextField()
+	
+	
+	def current_job(self):
+		if self.end_date == datetime.date.today():
+			return True
+	
+	
 	def __unicode__(self):
 		return self.user.username

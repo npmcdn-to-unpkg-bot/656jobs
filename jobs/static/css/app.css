@@ -212,19 +212,18 @@ section{
     color:white;
 }
 
-/*
+
 .debug{
     border:1px dashed black;
 }
-*/
+
 
 
 .profile{
     background-color: #FFF;
-    margin-left: 15px;
-    margin-top: 20px;
-    padding:20px;
     border-radius: 5px;
+    padding:20px;
+    margin-bottom:20px;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -262,3 +261,44 @@ section{
   margin-left:10px;
 }*/
 
+.profile_aside{
+    background-color: #FFF;
+    border-radius: 5px;
+    padding:20px;
+    margin-top:20px;
+    margin-bottom:20px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.person_image {
+  margin-top: 2rem;
+  position: relative;
+  height: 7rem;
+}
+
+.image-profile {
+  width: 8rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.person_name {
+  font-size: 1.4em;
+  margin: 2rem 0 0.25rem 2rem;
+}
+
+.person_job {
+  color: #BCBCBC;
+  margin-left:3.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85em;
+}
+
+.contact_button {
+  background: #FFFFFF;
+  border: none;
+  margin: 0 0.25rem 2rem;
+  margin-left: 6rem;
+}
