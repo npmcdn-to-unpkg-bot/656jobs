@@ -8,9 +8,15 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import UserForm, EditProfile, WorkExperienceForm
 from utils import username_exists
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+
+
 #from rest_framework import viewsets
 
 # Create your views here.
+# Favor de crear las vistas con nombres detallados para que no colisionen con los modelos
 
 class Index(View):
 	def get(self,request, *args, **kwargs):
@@ -32,6 +38,11 @@ class Details(View):
 class Dashboard(LoginRequiredMixin,View):
 	login_url = '/login/'
 	template_name = 'dashboard.html'
+	
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name)
+class Profiles(View):
+	template_name = 'profile.html'
 	work_experience_form = WorkExperienceForm
 	
 	def get(self, request, *args, **kwargs):
@@ -50,10 +61,11 @@ class Dashboard(LoginRequiredMixin,View):
 		if form.is_valid():
 			add_work = form.save(commit=False)
 			add_work.save()
-			return redirect('/dashboard')
+			return redirect('/profile')
 		else:
 			print "La forma no es valida"
-			return redirect('/dashboard')
+			return redirect('/profile')
+			
 class Login(View):
 	login_form = UserForm
 	
@@ -130,32 +142,31 @@ class UpdateProfile(View):
 	template_name = "update_profile.html"
 	profile_form = EditProfile
 	
-	
 	def get(self, request, *args, **kwargs):
 		
 		try:
 			profile = request.user.profile
-		except:
+		except Profile.DoesNotExist:
 			profile = Profile(user=request.user)
 		
-		form = self.profile_form(instance=profile)
+		form = self.profile_form(instance=profile)	
 		params = dict()
 		params["form"] = form
 		return render(request, self.template_name, params)
 		
 	
 	def post(self, request, *args, **kwargs):
+		
 		try:
 			profile = request.user.profile
-		except:
+		except Profile.DoesNotExist:
 			profile = Profile(user=request.user)
 			
 		form = self.profile_form(request.POST,request.FILES, instance=profile)
 		
 		if form.is_valid():
-			profile = form.save(commit=False)
-			profile.save()
-			return redirect('/dashboard')
+			form.save()
+			return HttpResponseRedirect(reverse('profile', args=[request.user.profile.uuid ]))
 		
 		else:
 			params = dict()

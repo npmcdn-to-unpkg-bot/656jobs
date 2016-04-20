@@ -17,7 +17,7 @@ from django.conf.urls import url, patterns, include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
-from jobs.views import Index, AllJobs, Details, DetailsById, Dashboard, Login, Logout, Register, UpdateProfile
+from jobs.views import Index, AllJobs, Details, DetailsById, Dashboard, Login, Logout, Register, UpdateProfile, Profiles
 from rest_framework.urlpatterns import format_suffix_patterns
 from jobs import views
 
@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'login/$', Login.as_view()),
     url(r'logout/$', Logout.as_view()),
     url(r'edit_profile/(?P<pk>[0-9]+)$', UpdateProfile.as_view()),
+    url(r'profile/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/(?P<pk>[0-9]+)', Profiles.as_view(), name='profile'),
+    url(r'profile/(?P<pk>[0-9]+)', Profiles.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
