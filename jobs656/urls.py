@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'api/(?P<pk>[0-9]+)/$', DetailsById.as_view()),
     url(r'login/$', Login.as_view()),
     url(r'logout/$', Logout.as_view()),
-    url(r'edit_profile/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/(?P<pk>[0-9]+)$', UpdateProfile.as_view()),
+    url(r'edit_profile/(?P<pk>[0-9]+)$', UpdateProfile.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

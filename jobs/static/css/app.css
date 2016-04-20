@@ -311,18 +311,27 @@ ul{
   border: none;
 }
 
-#main > h5{
+#main h5{
     font-size: 35px;
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
 }
 
-#main > h3{
+#main h3{
     font-size: 20px;
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
     font-weight: bold;
     color:#e42b48;
+    margin-left: 18px;
+}
+
+#main h4{
+    font-size: 15px;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color:#06145c;
 }
 
 .debug{
@@ -334,4 +343,18 @@ ul{
     text-transform: uppercase;
     padding-left: 20px;
     font-family: 'Oswald', sans-serif;
+}
+
+.workexperiencebox{
+    margin-top: 20px;
+}
+
+#work_dates{
+    border: 1px solid white;
+    padding: 5px;
+    background-color: whitesmoke;
+    color: gray;
+    width: 200px;
+    font-size: 10px;
+    text-align: center;
 }

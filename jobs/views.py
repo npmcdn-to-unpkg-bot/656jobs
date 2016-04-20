@@ -5,7 +5,7 @@ from rest_framework import generics
 from .serializers import JobsSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserForm, EditProfile
+from .forms import UserForm, EditProfile, WorkExperienceForm
 from utils import username_exists
 from django.contrib.auth.models import User
 #from rest_framework import viewsets
@@ -15,14 +15,12 @@ from django.contrib.auth.models import User
 class Index(View):
 	def get(self,request, *args, **kwargs):
 		return render(request, "index.html")
-
 class AllJobs(View):
 	def get(self,request, *args, **kwargs):
 		params = {}
 		jobs = Jobs.objects.all()
 		params["jobs"] = jobs
 		return render(request, "jobs.html", params)
-
 class Details(View):
 	def get(self,request, *args, **kwargs):
 		# Trarme los detalles mediante el slug, como argumento kwargs
@@ -31,18 +29,31 @@ class Details(View):
 		empleo = Jobs.objects.filter(slug=slug)
 		params["empleo"] = empleo
 		return render(request,"details.html", params)
-
 class Dashboard(LoginRequiredMixin,View):
 	login_url = '/login/'
+	template_name = 'dashboard.html'
+	work_experience_form = WorkExperienceForm
+	
 	def get(self, request, *args, **kwargs):
 		userid = User.objects.get(username=request.user)
 		userid = userid.id
 		work_experience = WorkExperience.objects.all().filter(user_id=userid)
+		form = self.work_experience_form
 		params = dict()
 		params["works"] = work_experience
-		return render(request, "dashboard.html", params)
+		params["form"] = form
+		return render(request, self.template_name, params)
 		
-		
+	def post(self,request,*args,**kwargs):
+		user = WorkExperience(user=request.user)
+		form = self.work_experience_form(request.POST,instance=user)
+		if form.is_valid():
+			add_work = form.save(commit=False)
+			add_work.save()
+			return redirect('/dashboard')
+		else:
+			print "La forma no es valida"
+			return redirect('/dashboard')
 class Login(View):
 	login_form = UserForm
 	
@@ -69,12 +80,10 @@ class Login(View):
 				params["form"] = form
 				params["error"] = error
 		return render(request,"login.html", params)
-
 class Logout(View):
 	def get(self, request, *args, **kwargs):
 		logout(request)
 		return redirect('/')			
-	
 class Register(View):
 	register_form = UserForm
 	
@@ -114,13 +123,9 @@ class Register(View):
 					params["error"] = form.errors
 					params["form"] = form
 					return render(request,"register.html", params)
-					
-		
 class DetailsById(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Jobs.objects.all()
 	serializer_class = JobsSerializer
-	
-	
 class UpdateProfile(View):
 	template_name = "update_profile.html"
 	profile_form = EditProfile

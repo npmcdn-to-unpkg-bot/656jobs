@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import TextInput
-from .models import Profile
+from .models import Profile, WorkExperience
 
 
 class UserForm(forms.ModelForm):
@@ -40,4 +40,14 @@ class EditProfile(forms.ModelForm):
         exclude = ('user',)
         widgets = {
             'professional_name' : TextInput(attrs = {'class' : 'form-control', 'name' : 'professionalname', 'placeholder': 'ej. Ingeniero en sistemas, Mecanico, Medico', 'aria-describedby': 'basic-addon1' })
+        }
+        
+        
+class WorkExperienceForm(forms.ModelForm):
+    class Meta:
+        model = WorkExperience
+        fields = ['job_title','place','start_date','end_date','work_description']
+        widgets = {
+            'start_date' : TextInput(attrs = {'class' : 'datepicker'}),
+            'end_date' : TextInput(attrs = {'class' : 'datepicker'})
         }

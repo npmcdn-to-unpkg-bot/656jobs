@@ -70,6 +70,7 @@ class Profile(models.Model):
 		
 class WorkExperience(models.Model):
 	user = models.ForeignKey(User)
+	job_title = models.CharField(max_length=50)
 	place = models.CharField(max_length=100)
 	start_date = models.DateField() 
 	end_date = models.DateField()
