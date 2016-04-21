@@ -61,11 +61,10 @@ class Profiles(View):
 		if form.is_valid():
 			add_work = form.save(commit=False)
 			add_work.save()
-			return redirect('/profile')
+			return HttpResponseRedirect(reverse('profile', kwargs = {'uuid' : request.user.profile.uuid }))
 		else:
 			print "La forma no es valida"
-			return redirect('/profile')
-			
+			return HttpResponseRedirect(reverse('profile', kwargs = {'uuid' : request.user.profile.uuid }))
 class Login(View):
 	login_form = UserForm
 	
@@ -166,7 +165,7 @@ class UpdateProfile(View):
 		
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect(reverse('profile', args=[request.user.profile.uuid ]))
+			return HttpResponseRedirect(reverse('profile', kwargs = {'uuid' : request.user.profile.uuid }))
 		
 		else:
 			params = dict()

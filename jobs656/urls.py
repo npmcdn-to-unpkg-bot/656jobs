@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'login/$', Login.as_view()),
     url(r'logout/$', Logout.as_view()),
     url(r'edit_profile/(?P<pk>[0-9]+)$', UpdateProfile.as_view()),
-    url(r'profile/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/(?P<pk>[0-9]+)', Profiles.as_view(), name='profile'),
+    url(r'profile/(?P<uuid>[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})', Profiles.as_view(), name='profile'),
     url(r'profile/(?P<pk>[0-9]+)', Profiles.as_view()),
 ]
 
