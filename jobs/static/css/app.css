@@ -363,3 +363,7 @@ ul{
     color:red;
     font-weight: 700;
 }
+
+#public_profile_url{
+    font-size:8px;
+}

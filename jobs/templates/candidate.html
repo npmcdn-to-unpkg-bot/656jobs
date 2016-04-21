@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <section>
+    	<div class="row">
+        	<div class="col-md-6">
+        		<ol class="breadcrumb">
+        			<li><a href="/">Inicio</a></li>
+        			<li class="active">Perfil</li>
+        		</ol>
+        	</div>
+        </div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile_aside">
+                            <div class="person_image">
+                                {% load staticfiles %}
+                                {% if userprofile %}
+                                <img class="image-profile" src="{{ userprofile.profile_image.url }}" alt="profile">
+                                {% else %}
+                                <img class="image-profile" src="{% static 'img/user_empty.png' %}" alt="profile">
+                                {% endif %}
+                            </div>
+                             <h4 class="person_name">{{ candidate.get_full_name }}</h4>
+                             <p class="person_job">{{ userprofile.professional_name }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="main" class="profile-main">
+                    <h5>Habilidades</h5>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>{{ candidate.profile.summary | safe }}</p>
+                        </div>
+                    </div>
+                    <h5>Experiencia Laboral</h5>
+                    {% for work in works %}
+                        <div class="panel panel-default workexperiencebox">
+                            <h3>{{ work.place }}</h3>
+                            <div class="panel-body">
+                                <h4>{{ work.job_title }}</h4>
+                                <hr>
+                                {% if work.current_job  %}
+                                    <p id="work_dates">Empleo Actual</p>
+                                {% else %}
+                                    <p id="work_dates">{{ work.start_date }} - {{ work.end_date }}</p>
+                                {% endif %}
+                                <p>{{ work.work_description | safe }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+	</section>
+</div>
+{% endblock %}

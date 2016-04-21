@@ -172,3 +172,18 @@ class UpdateProfile(View):
 			params["error"] = form.errors
 			params["form"] = form
 			return render(request, self.template_name, params)
+class PublicProfile(View):
+	template_name = 'candidate.html'
+	def get(self, request, *args, **kwargs):
+		uuid = self.kwargs['uuid']
+		# get user
+		user_profile = Profile.objects.get(uuid=uuid)
+		candidate = User.objects.get(username=user_profile)
+		work_experience = WorkExperience.objects.all().filter(user=candidate)
+		print work_experience
+		params = dict()
+		params["userprofile"] = user_profile
+		params["candidate"] = candidate
+		params["works"] = work_experience
+		return render(request, self.template_name, params)
+		
